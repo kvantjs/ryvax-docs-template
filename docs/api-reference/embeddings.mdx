@@ -1,0 +1,29 @@
+---
+title: "Create Embeddings"
+description: "Synthesize high-dimensional dense float vectors representing input semantic concepts."
+api: "POST /embeddings"
+---
+
+# Create Embeddings
+
+Convert any input words or lists of strings into a standardized 1536-dimensional semantic float array.
+
+## Request Parameters
+
+<ParamField body="input" type="string or array" required={true}>
+  Input text strings to vectorize. Max length is 8,192 tokens per text element.
+</ParamField>
+
+<ParamField body="model" type="string" default="nexus-embed-dense-v2">
+  Target embedding model version.
+</ParamField>
+
+## Response Fields
+
+<ResponseField name="object" type="string">
+  Always returns `list`.
+</ResponseField>
+
+<ResponseField name="data" type="array">
+  An array containing individual dense embedding vectors.
+</ResponseField>

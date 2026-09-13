@@ -1,0 +1,22 @@
+---
+title: "Production Checklist"
+description: "Essential security, caching, and retry parameters for mission-critical deployments."
+---
+
+# Production Readiness
+
+Follow these core engineering checklist items to ensure 99.99% reliability and zero-overhead performance when running Nexus in enterprise-grade configurations.
+
+## Best Practice Guidelines
+
+1. **Implement Exponential Backoff**
+   Wrap API socket write calls in exponential retry routines with randomized jitter (e.g., 100ms, 400ms, 1600ms) to prevent hammering gateway nodes during occasional global DNS hops.
+
+2. **Configure Client Connect Timeouts**
+   Always enforce maximum connection timeout margins (ideally 10s–15s) so your server-side processes don't leak unclosed file descriptors.
+
+3. **Cache Static Vector Results**
+   Vector outputs for invariant knowledge corpuses do not change. Store dense 1536 float embeddings in external Redis or key-value caches using `sha256(text)` as the key to reduce latency and API billing.
+
+4. **Monitor Error Budgets**
+   Hook alerts into HTTP `429` (Rate Limited) or `500` status counts if cumulative volume surpasses 0.5% of total requests over rolling 5-minute segments.

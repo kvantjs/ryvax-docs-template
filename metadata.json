@@ -1,0 +1,6 @@
+{
+  "name": "Nexus Developer Documentation",
+  "description": "The official Ryvax.js developer documentation interface with dark mode, interactive API explorer, and live code execution playgrounds, created with Kvant.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

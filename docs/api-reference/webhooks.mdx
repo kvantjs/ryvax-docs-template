@@ -1,0 +1,19 @@
+---
+title: "Webhooks Guide"
+description: "Configure push-delivery webhook listeners to sync real-time state transitions."
+api: "POST /webhooks"
+---
+
+# Webhooks & Event Streams
+
+Subscribe to state machine transitions, background evaluations, or custom pipelines without continuously polling the API.
+
+## Payload Fields
+
+<ResponseField name="event" type="string">
+  The trigger slug (e.g. `agent.completed`, `stream.disconnected`).
+</ResponseField>
+
+<ResponseField name="payload" type="object">
+  Detailed contextual metadata containing affected resource identifiers and status.
+</ResponseField>

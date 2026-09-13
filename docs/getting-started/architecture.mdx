@@ -1,0 +1,27 @@
+---
+title: "Architecture & SDK Design"
+description: "Understand the Nexus distributed mesh, edge gateways, retry budgets, and connection pooling."
+---
+
+# Architecture & SDK Design
+
+The official SDKs are architected around connection recycling and transparent Anycast BGP routing to ensure consistent sub-20ms packet round trips.
+
+## Edge Gateway Routing
+
+Requests are directed automatically to the closest of 32 Global Anycast PoPs, minimizing physical fiber delays before tunneling to target micro-VPCs.
+
+## Keep-Alive & Connection Pooling
+
+Clients are encouraged to hold a long-lived single client instance to prevent redundant TCP handshakes and TLS negotiations.
+
+```typescript
+// singleton client instance example
+import { NexusClient } from '@nexus/sdk';
+
+export const nexus = new NexusClient({
+  apiKey: process.env.NEXUS_API_KEY!,
+  maxRetries: 3,
+  keepAlive: true,
+});
+```

@@ -1,0 +1,30 @@
+{
+  "name": "testapp",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "npm run css:build && ryvax dev",
+    "build": "npm run css:build && ryvax build",
+    "build:vercel": "npm run css:build && ryvax build:vercel",
+    "build:netlify": "npm run css:build && ryvax build:netlify",
+    "deploy": "npm run css:build && ryvax deploy",
+    "start": "ryvax start",
+    "css:build": "tailwindcss -i ./src/styles.css -o ./public/styles.css --minify",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@kvantjs/ryvax.js": "^2.1.0",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "@types/react": "^19.2.18",
+    "@types/react-dom": "^19.2.7",
+    "tsx": "^4.19.0",
+    "typescript": "^5.7.0",
+    "tailwindcss": "^3.4.0",
+    "postcss": "^8.4.0",
+    "autoprefixer": "^10.4.0"
+  }
+}

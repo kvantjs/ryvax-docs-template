@@ -1,0 +1,70 @@
+---
+title: "Quickstart Guide"
+description: "Send your first API request and explore the core developer workflows in under 5 minutes."
+---
+
+# Quickstart Guide
+
+This quickstart walks you through obtaining your credentials, initializing the client, and receiving your first streamed response using the official client libraries.
+
+<Callout type="info" title="API Base URL">
+  All requests should be directed to `https://api.nexus-runtime.dev/v1` unless you are using an enterprise on-premise VPC gateway.
+</Callout>
+
+## Step 1: Install the SDK
+
+Install our official client library for your preferred language runtime or package manager.
+
+```bash Terminal
+# Install via npm
+npm install @nexus/sdk
+
+# Install via pip
+pip install nexus-sdk
+
+# Install via cargo
+cargo add nexus-sdk --features streaming
+```
+
+## Step 2: Make Your First Request
+
+Initialize the client with your secret API token and invoke the chat completion endpoint.
+
+```typescript TypeScript
+import { NexusClient } from '@nexus/sdk';
+
+const client = new NexusClient({
+  apiKey: process.env.NEXUS_API_KEY || 'nx_live_9948271049281',
+});
+
+async function main() {
+  const response = await client.chat.create({
+    model: 'nexus-4-turbo',
+    messages: [
+      { role: 'system', content: 'You are a concise engineering assistant.' },
+      { role: 'user', content: 'Explain zero-copy deserialization in one sentence.' },
+    ],
+    temperature: 0.2,
+  });
+
+  console.log(response.choices[0].message.content);
+}
+
+main();
+```
+
+## Step 3: Stream Token Responses
+
+For real-time user experiences, enable chunk-by-chunk token streaming.
+
+```typescript Streaming
+const stream = await client.chat.create({
+  model: 'nexus-4-turbo',
+  messages: [{ role: 'user', content: 'Describe memory virtualization.' }],
+  stream: true,
+});
+
+for await (const chunk of stream) {
+  process.stdout.write(chunk.choices[0].delta.content || '');
+}
+```

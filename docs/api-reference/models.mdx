@@ -1,0 +1,19 @@
+---
+title: "List Models"
+description: "Retrieve comprehensive telemetry and metadata of all active cognitive model clusters."
+api: "GET /models"
+---
+
+# List Available Models
+
+Get an active roster of available neural structures currently hot-loaded in memory rings across global Anycast points of presence.
+
+## Response Fields
+
+<ResponseField name="object" type="string">
+  Always returns `list`.
+</ResponseField>
+
+<ResponseField name="data" type="array">
+  List of active model records with unique parameters and active token quotas.
+</ResponseField>

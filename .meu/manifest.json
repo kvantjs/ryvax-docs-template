@@ -1,0 +1,57 @@
+{
+  "generatedAt": "2026-09-13T22:57:56.181Z",
+  "runtime": "node",
+  "outputDir": "/home/ubuntu/ryvax-templates/docs/.meu",
+  "capabilities": {
+    "api": false,
+    "ssr": true,
+    "ssg": true,
+    "streaming": true,
+    "client": true
+  },
+  "routes": [
+    {
+      "id": "pages:index",
+      "kind": "ssr",
+      "pathname": "/",
+      "pattern": "/",
+      "file": "/home/ubuntu/ryvax-templates/docs/pages/index.tsx",
+      "bundle": "/home/ubuntu/ryvax-templates/docs/.meu/routes/pages_index-a2496845.mjs",
+      "segments": [],
+      "dynamic": false,
+      "catchAll": false
+    }
+  ],
+  "client": {
+    "entry": "/home/ubuntu/ryvax-templates/docs/.meu/static/client.js"
+  },
+  "graph": {
+    "schemaVersion": 1,
+    "rootDir": "/home/ubuntu/ryvax-templates/docs",
+    "runtime": "node",
+    "capabilities": {
+      "api": false,
+      "ssr": true,
+      "ssg": true,
+      "streaming": true,
+      "client": true
+    },
+    "routeCount": 1,
+    "apiRouteCount": 0,
+    "pageRouteCount": 1,
+    "dynamicRouteCount": 0,
+    "actionCount": 0,
+    "routes": [
+      {
+        "id": "pages:index",
+        "pathname": "/",
+        "kind": "ssr",
+        "dynamic": false,
+        "catchAll": false,
+        "segments": [],
+        "layouts": 0,
+        "boundaries": []
+      }
+    ]
+  }
+}

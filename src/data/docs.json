@@ -1,0 +1,50 @@
+{
+  "name": "Ryvax Docs",
+  "logo": {
+    "light": "/images/logo-light.svg",
+    "dark": "/images/logo-dark.svg"
+  },
+  "favicon": "/images/favicon.png",
+  "colors": {
+    "primary": "#3b82f6",
+    "light": "#fafafa",
+    "dark": "#0a0a0a",
+    "border": "#141414"
+  },
+  "navigation": [
+    {
+      "group": "Getting Started",
+      "pages": [
+        "docs/getting-started/introduction",
+        "docs/getting-started/quickstart"
+      ]
+    },
+    {
+      "group": "API Reference",
+      "pages": [
+        "docs/api-reference/completions",
+        "docs/api-reference/embeddings",
+        "docs/api-reference/models",
+        "docs/api-reference/webhooks"
+      ]
+    },
+    {
+      "group": "Interactive Playgrounds",
+      "pages": [
+        "docs/playgrounds/latency-monitor",
+        "docs/playgrounds/prompt-tokenizer",
+        "docs/playgrounds/curl-converter",
+        "docs/playgrounds/schema-validator"
+      ]
+    },
+    {
+      "group": "Guides & Best Practices",
+      "pages": [
+        "docs/guides-recipes/production-checklist"
+      ]
+    }
+  ],
+  "api": {
+    "spec": "/openapi.json"
+  }
+}

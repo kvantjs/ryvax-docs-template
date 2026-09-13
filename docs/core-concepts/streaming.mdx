@@ -1,0 +1,30 @@
+---
+title: "Streaming & Server-Sent Events"
+description: "Stream continuous token deltas in real-time using standard Server-Sent Events (SSE) protocol."
+---
+
+# Streaming & SSE Protocol
+
+Enabling the `stream: true` parameter instructs the gateway nodes to push incremental JSON chunks over a standard text/event-stream channel.
+
+<Callout type="tip">
+  Use streaming to reduce time-to-first-token (TTFT) metrics from 1,200ms to under 80ms!
+</Callout>
+
+## Streaming Loop Code
+
+```typescript
+import { NexusClient } from '@nexus/sdk';
+
+const client = new NexusClient({ apiKey: process.env.NEXUS_API_KEY });
+
+const stream = await client.chat.create({
+  model: 'nexus-4-turbo',
+  messages: [{ role: 'user', content: 'Draft a system design for a rate limiter.' }],
+  stream: true,
+});
+
+for await (const chunk of stream) {
+  process.stdout.write(chunk.choices[0]?.delta?.content || '');
+}
+```

@@ -1,0 +1,232 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Nexus Runtime API",
+    "description": "Unified high-performance runtime for intelligent agentic streaming, dense embeddings, and serverless compute orchestration.",
+    "version": "2.4.0",
+    "contact": {
+      "name": "Nexus Developer Relations",
+      "url": "https://nexus-runtime.dev/support"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://api.nexus-runtime.dev/v1",
+      "description": "Anycast Global Edge Gateway"
+    }
+  ],
+  "paths": {
+    "/chat/completions": {
+      "post": {
+        "summary": "Create Chat Completion",
+        "description": "Stream or synthesize language completions using deep cognitive autoregressive model tiers.",
+        "operationId": "createChatCompletion",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["model", "messages"],
+                "properties": {
+                  "model": {
+                    "type": "string",
+                    "enum": ["nexus-4-turbo", "nexus-4-omni", "nexus-lite"],
+                    "default": "nexus-4-turbo",
+                    "description": "The tier-specific target computational model."
+                  },
+                  "messages": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "required": ["role", "content"],
+                      "properties": {
+                        "role": {
+                          "type": "string",
+                          "enum": ["system", "user", "assistant"]
+                        },
+                        "content": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  },
+                  "temperature": {
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 2,
+                    "default": 0.7
+                  },
+                  "stream": {
+                    "type": "boolean",
+                    "default": false
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful completion response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": { "type": "string" },
+                    "object": { "type": "string", "example": "chat.completion" },
+                    "created": { "type": "integer" },
+                    "choices": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "message": {
+                            "type": "object",
+                            "properties": {
+                              "role": { "type": "string" },
+                              "content": { "type": "string" }
+                            }
+                          },
+                          "finish_reason": { "type": "string" }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/embeddings": {
+      "post": {
+        "summary": "Create Embeddings",
+        "description": "Synthesize a dense 1536-dimensional float vector representation representing the input semantic context.",
+        "operationId": "createEmbeddings",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["input"],
+                "properties": {
+                  "input": {
+                    "oneOf": [
+                      { "type": "string" },
+                      { "type": "array", "items": { "type": "string" } }
+                    ],
+                    "description": "Input text or sequence of strings to vectorize."
+                  },
+                  "model": {
+                    "type": "string",
+                    "default": "nexus-embed-dense-v2"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Calculated vector embeddings",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "object": { "type": "string", "example": "list" },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "object": { "type": "string", "example": "embedding" },
+                          "embedding": {
+                            "type": "array",
+                            "items": { "type": "number" }
+                          },
+                          "index": { "type": "integer" }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/models": {
+      "get": {
+        "summary": "List Available Models",
+        "description": "Retrieve comprehensive telemetry and metadata of all active cognitive model clusters hosted on global edge networks.",
+        "operationId": "listModels",
+        "responses": {
+          "200": {
+            "description": "Active models list",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "object": { "type": "string", "example": "list" },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": { "type": "string" },
+                          "object": { "type": "string", "example": "model" },
+                          "created": { "type": "integer" },
+                          "owned_by": { "type": "string" },
+                          "context_window": { "type": "integer" }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/webhooks": {
+      "post": {
+        "summary": "Dispatch Webhook Event",
+        "description": "Receive synchronous event notifications triggered by changes to agent workspace states or computational pipeline transitions.",
+        "operationId": "dispatchWebhook",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["event", "payload"],
+                "properties": {
+                  "event": {
+                    "type": "string",
+                    "example": "agent.completed"
+                  },
+                  "payload": {
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "202": {
+            "description": "Webhook dispatched successfully"
+          }
+        }
+      }
+    }
+  }
+}

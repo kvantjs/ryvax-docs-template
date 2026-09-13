@@ -1,0 +1,26 @@
+---
+title: "Idempotency & Safe Retries"
+description: "Prevent duplicate mutations and charge errors using Idempotency-Key headers."
+---
+
+# Idempotency & Safe Retries
+
+Avoid duplicate system actions, pipeline executions, or billing errors during client-side retries.
+
+## How Idempotency Keys Work
+
+Provide a unique UUID key in your `Idempotency-Key` headers. If network interruptions occur, resending the identical payload with the identical key will return cached answers rather than repeating system actions.
+
+```typescript
+const response = await client.chat.create(
+  {
+    model: 'nexus-4-turbo',
+    messages: [{ role: 'user', content: 'Generate unique order invoice #9921' }]
+  },
+  {
+    headers: {
+      'Idempotency-Key': 'order_invoice_req_uuid_9921_x'
+    }
+  }
+);
+```

@@ -1,0 +1,41 @@
+---
+title: "Chat Completions"
+description: "Stream or synthesize language completions using deep cognitive autoregressive model tiers."
+api: "POST /chat/completions"
+---
+
+# Create Chat Completion
+
+Synthesize response payloads using the robust Nexus-4 model clusters. Support standard JSON returns and multiplexed Server-Sent Events (SSE) streaming.
+
+## Request Parameters
+
+<ParamField body="model" type="string" required={true} default="nexus-4-turbo">
+  Target model cluster. Options: `nexus-4-turbo`, `nexus-4-omni`, `nexus-lite`.
+</ParamField>
+
+<ParamField body="messages" type="array" required={true}>
+  An array of chat message items reflecting the conversation history.
+</ParamField>
+
+<ParamField body="temperature" type="number" default={0.7}>
+  Control token entropy. Higher values yield more creative responses.
+</ParamField>
+
+<ParamField body="stream" type="boolean" default={false}>
+  Whether to push incremental chunk updates over a text/event-stream connection.
+</ParamField>
+
+## Response Fields
+
+<ResponseField name="id" type="string">
+  The unique transmission identifier.
+</ResponseField>
+
+<ResponseField name="object" type="string">
+  Always returns `chat.completion`.
+</ResponseField>
+
+<ResponseField name="choices" type="array">
+  List of candidate completions.
+</ResponseField>

@@ -1,0 +1,29 @@
+---
+title: "Introduction"
+description: "Welcome to the Nexus Documentation Engine. The high-performance runtime for agentic workflows."
+---
+
+# Introduction to Nexus
+
+Nexus is a globally-distributed, low-latency API gateway and computational execution layer designed to orchestrate stateful AI agents, calculate semantic embeddings, and process multiplexed streaming events at the edge.
+
+<CardGroup cols={2}>
+  <Card title="Quickstart Guide" icon="rocket" href="/getting-started/quickstart">
+    Send your first API call in under five minutes using our SDKs.
+  </Card>
+  <Card title="API Reference" icon="code" href="/api-reference/completions">
+    Explore raw HTTP request-response specifications and parameters.
+  </Card>
+</CardGroup>
+
+## Core Principles
+
+The platform is engineered around three foundational paradigms:
+
+1. **Edge-First Computation**: Standard API calls are routed using BGP Anycast to the nearest of 48 micro-VPCs, keeping response overhead below 20ms globally.
+2. **Stateful Session Pools**: Agent state is held in fast memory rings, eliminating the need for client-side roundtrips to reconstruct context histories.
+3. **Strict Protocol Deserialization**: Low-level memory buffers read socket streams without double allocation, allowing 1,000+ tokens/sec on active channels.
+
+<Callout type="info">
+  This site serves as the ultimate developer manual and is powered by standard Mintlify configurations. Toggle the view source to inspect original MDX structures.
+</Callout>

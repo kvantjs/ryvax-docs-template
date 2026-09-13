@@ -1,0 +1,20 @@
+---
+title: "Rate Limits & Quotas"
+description: "Understand Requests-Per-Minute (RPM), Tokens-Per-Minute (TPM), and cost calculation models."
+---
+
+# Rate Limits & Quotas
+
+Understand physical limitations, error structures, and response headers for token allocation budgets.
+
+## Rate Limit Headers
+
+Every HTTP response includes rate limit telemetry for proactive pacing:
+
+- `x-ratelimit-limit-requests`: Total allowed per minute.
+- `x-ratelimit-remaining-requests`: Remaining allowed within active rolling 60-second window.
+- `x-ratelimit-reset-requests`: Decimal delay values (seconds) before budget replenishment.
+
+<Callout type="info">
+  When thresholds are exceeded, the server returns an HTTP 429 status code with a standard `Retry-After` offset.
+</Callout>

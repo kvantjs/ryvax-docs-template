@@ -1,0 +1,30 @@
+---
+title: "Authentication & API Keys"
+description: "Secure your API credentials, configure authorization headers, and implement automated key rotation."
+---
+
+# Authentication
+
+Secure your endpoints using scoped, cryptographically verifiable tokens.
+
+## API Key Formats
+
+The Nexus Platform enforces structured prefixes to make scanning and key auditing easy:
+
+- `nx_live_`: Production-only traffic against active inference clusters.
+- `nx_test_`: Sandbox key for zero-quota testing and local testing.
+- `nx_adm_`: Scoped administrative credentials for controlling cluster quotas.
+
+<Callout type="warning">
+  **Never commit keys to version control**. Keep them isolated in environment variables.
+</Callout>
+
+## HTTP Authorization Header
+
+Provide your token using standard Bearer authorization:
+
+```bash
+curl https://api.nexus-runtime.dev/v1/models \
+  -H "Authorization: Bearer nx_live_9948271049281" \
+  -H "X-Nexus-Version: 2026-08-01"
+```
