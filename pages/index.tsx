@@ -7,7 +7,7 @@ const assetBase = process.env.GITHUB_ACTIONS === 'true' ? '/ryvax-docs-template'
 const page: PageModule = {
   default() {
     return (
-      <html lang="en">
+      <html lang="en" className="dark">
         <head>
           <meta charSet="UTF-8" />
           <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -23,7 +23,7 @@ const page: PageModule = {
         </head>
         <body className="bg-[#0a0a0a] text-neutral-100 antialiased selection:bg-neutral-800 selection:text-white dark">
           <div id="root"><App /></div>
-          <script type="module" src={`${assetBase}/_meu/static/client.js`}></script>
+          <script type="module" src={`${assetBase}/client.js`}></script>
         </body>
       </html>
     );
