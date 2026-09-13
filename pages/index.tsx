@@ -1,6 +1,9 @@
 import type { PageModule } from '@kvantjs/ryvax.js';
 import App from '../src/App.tsx';
 
+export const getStaticProps = async () => ({});
+const assetBase = process.env.GITHUB_ACTIONS === 'true' ? '/ryvax-docs-template' : '';
+
 const page: PageModule = {
   default() {
     return (
@@ -16,11 +19,11 @@ const page: PageModule = {
           <link rel="preconnect" href="https://fonts.googleapis.com" />
           <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
           <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
-          <link rel="stylesheet" href="/styles.css" />
+          <link rel="stylesheet" href={`${assetBase}/styles.css`} />
         </head>
         <body className="bg-[#0a0a0a] text-neutral-100 antialiased selection:bg-neutral-800 selection:text-white dark">
           <div id="root"><App /></div>
-          <script type="module" src="/_meu/static/client.js"></script>
+          <script type="module" src={`${assetBase}/_meu/static/client.js`}></script>
         </body>
       </html>
     );
