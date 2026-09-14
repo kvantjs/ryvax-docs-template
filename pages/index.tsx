@@ -2,7 +2,7 @@ import type { PageModule } from '@kvantjs/ryvax.js';
 import App from '../src/App.tsx';
 
 export const getStaticProps = async () => ({});
-const assetBase = process.env.GITHUB_ACTIONS === 'true' ? '/ryvax-docs-template' : '';
+const assetBase = process.env.GITHUB_ACTIONS === 'true' ? '.' : '';
 
 const page: PageModule = {
   default() {
